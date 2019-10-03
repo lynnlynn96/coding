@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <style type="text/css">
+    .section1{
+      background-color: blue;
+
+    }
+    .section1 img{
+      width:100%;
+      height:auto;
+    }
+
+    .section2{
+      background-color: grey;
+    }
+
+    .container{
+      display: flex;
+    }
+    .container .video1{
+      flex:1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .video1 iframe{
+      width:50%;
+    }
+
+    .container .description{
+      flex:1;
+    }
+
+    header{ 
+      background-color: #F8F8F8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 150px;
+    }
+
+    footer{
+      background-color: #F8F8F8;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class='title'><img src="CostcoLogo1.png"></div> 
+  </header>
+  <section class="section1"> 
+    <img src="costco.jpg" alt="costco"/> 
+  </section>
+  <div class="container"> 
+    <section class="video1">
+      <iframe src="https://www.youtube.com/embed/K4x2gnzm7H8" ></iframe> 
+    </section>
+    <section class="description">
+      <h4>What Is Costco?</h4>
+      <p>Costco is a membership warehouse club, dedicated to bringing our members the best possible prices on quality brand-name merchandise. With hundreds of locations worldwide, Costco provides a wide selection of merchandise, plus the convenience of specialty departments and exclusive member services, all designed to make your shopping experience a pleasurable one.</p>
+    </section>
+  </div>
+  <footer> 
+    <div align="center">
+        <input type="text" name="find a warehouse" value="find a warehouse">
+        <br>
+        <input type="text" name="get email offers" value="get email offers">
+        <br>
+        <div id="login"><a href="https://www.costco.com/">more information</a></div>
+    </div>    
+   </footer>
+
+</body>
+</html>
