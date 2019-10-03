@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>  
+  <title>start</title>
+  <style type="text/css">
+  body {
+  background-color: #F8F8F8;
+}
+  header, footer{  
+  height: 60px;
+  background-color: white;
+  position: fixed;
+  left: 0;
+  right: 0;
+}
+
+  header{
+  top:0;
+}
+
+  main{
+  margin-top: 60px;
+  padding: 20px;  
+}
+  main .question{
+  width:50%;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+  .question{
+  margin:auto;
+}
+  .progress{
+  font-size: 10pt;
+}
+  #progressbar{
+  background-color: #F8F8F8;
+  border-radius: 5px;
+  padding: 1px;
+}
+  #progressbar>div {
+  background-color: #4990e7;
+  width: 10%;
+  height: 10px;
+  border-radius: 5px;
+}
+  main .button{
+  position:relative;
+  margin-left: calc(25% - 20px);
+  margin-top:20px;
+  padding: 10px 20px;
+  text-align: center;
+  color:gray;
+  float:left;
+  text-decoration: none;
+  background-color: #cccccc;
+}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Select Topic</h1>
+  </header>
+  <main>
+    <div class="question">
+      <input type="checkbox" value="HTML" class="topic-checkbox"><strong>HTML</strong><br>
+      <div class="progress">Questions Mastered: 32/100</div>
+      <div id="progressbar">
+          <div></div>
+      </div>      
+      <input type="checkbox" value="CSS" class="topic-checkbox"><strong>CSS</strong><br>
+      <div class="progress">Questions Mastered: 76/100</div>
+      <div id="progressbar">
+          <div></div>
+      </div>
+      <input type="checkbox" value="Javascript" class="topic-checkbox"><strong>Javascript</strong><br>
+      <div class="progress">Questions Mastered: 32/100</div>
+      <div id="progressbar">
+          <div></div>
+      </div>
+      <input type="checkbox" value="Accessiblity" class="topic-checkbox"><strong>Accessiblity</strong><br>
+      <div class="progress">Questions Mastered: 23/100</div>
+      <div id="progressbar">
+          <div></div>
+      </div>      
+    </div>
+    <div class="button">Start Quiz</div>
+  </main>
+  
+</body>
+</html>
