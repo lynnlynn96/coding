@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <div id="returnHere"></div>
+  
+  <script type="text/javascript">
+    //add dates into variables
+    let birthYear = 1993;
+    let futureYear = 2025;
+    //do some math and store in a variable
+    let age = futureYear - birthYear;
+
+    //locate the div with the id of returnHere and store in a variable
+    let ageElement = document.querySelector("#returnHere");
+
+    //concatinate the string with the new variables inside the HTML div that you just created a variable for.
+    ageElement.innerHTML = "I will be " + age + " in " + futureYear;
+
+  </script>
+</body>
+</html>
