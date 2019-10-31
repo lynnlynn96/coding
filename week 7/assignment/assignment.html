@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Week 7 Assignment</title>
+</head>
+<body>
+  <div id="Greetings"></div>
+  <script type="text/javascript">
+    let element = document.querySelector("#Greetings");
+    let today = new Date();
+    let hour = today.getHours();
+
+    if(hour >=5 && hour <= 11){
+     element.innerHTML = "Good Morning!";
+    }else if(hour >= 12 && hour <= 17){
+     element.innerHTML = "Good Afternoon!";
+    }else{
+     element.innerHTML = "Good Evening!";
+    }
+    
+  
+
+
+
+
+
+
+
+    
+    
+
+  </script>
+</body>
+</html>
