@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title></title>
+  <style type="text/css">
+    header,
+    footer {
+      height: 60px;
+      background-color: white;
+      position: fixed;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    body {
+      background-color: #F8F8F8;
+      font-family: Times New Roman;
+    }
+
+    header {
+      top: 0;      
+    }
+
+    footer {
+      bottom: 0;
+    }
+
+    h1 {
+      margin-left: 20px;
+    }
+  
+    main {
+      margin-top: 60px;
+      padding: 20px;
+    }
+
+    main .question {
+      width: 50%;
+      padding: 20px;
+      background-color: white;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    }
+
+    .question {
+      margin: auto;
+    }
+
+    .headerbutton {
+      margin-top: 15px;
+      margin-right: 20px;
+      background-color: white;
+      color: #4990e7;
+      border: 2px solid #4990e7;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      float: right;
+      font-size: 16px;
+    }
+
+    .footerbutton {
+      margin-bottom: 15px;
+      margin-right: 20px;
+      background-color: #4990e7;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      float: right;
+      font-size: 16px;
+    }
+    #dataContainer {
+      display: flex;
+    }
+    #progressDots {
+      display: flex;
+    }
+    .dots {
+      height: 25px;
+      width: 25px;
+      border-radius: 12.5px;
+      border: solid 2px;
+      border-color: #F0F0F0;
+    }
+
+    .correct {
+      background-color: #CCF2CD;
+    }
+
+    .incorrect {
+      background-color: #F1C9CF;
+    }
+  </style>
+  
+</head>
+
+<body>    
+  <header>
+    <h1>Quiz</h1>
+    <div class='headerbutton'>End Practice</div>
+  </header>
+  <main>
+    <div class='question'>
+      <h2 id="currentQuestionHeader"></h2>
+      <p id="questionText"></p>
+      <ol id="listItems", type="A">
+        <!-- <li><label><input type="radio" name="option">script</label></li> -->
+      </ol>
+    </div>
+  </main>
+  <footer>
+    <div id="dataContainer"> 
+      <div id="progressDots">
+        <!-- <div></div> -->
+      </div>
+      <a href="#">View Report</a>
+    </div>
+    <!-- <div class="dots correct"></div>
+    <div class="dots incorrect"></div>
+    <div class="dots correct"></div>
+    <div class="dots blank"></div>
+    <div class="dots blank"></div>
+    <div class="dots blank"></div>
+    <div class="dots blank"></div>
+    <div class="dots blank"></div>
+    <p><a href="#">View Report</a></p> -->
+    <div class='footerbutton'>Check Answer</div>
+  </footer>
+</body>
+<script type="text/javascript">
+  var activeQuestions = [
+    {
+      question: "What tag should I use if I want to add an external javascript file",
+      response: ["script", "javascript", "include", "style"]
+    },
+    {
+      question: "HTML Question B",
+      response: ["Option B1", "Option B2", "Option B3", "Option B4"]
+    },
+    {
+      question: "HTML Question C",
+      response: ["Option C1", "Option C2", "Option C3", "Option C4"]
+    },
+    {
+      question: "HTML Question D",
+      response: ["Option D1", "Option D2", "Option D3", "Option D4"]
+    },
+    {
+      question: "HTML Question E",
+      response: ["Option E1", "Option E2", "Option E3", "Option E4"]
+    },
+    {
+      question: "HTML Question F",
+      response: ["Option F1", "Option F2", "Option F3", "Option F4"]
+    },
+    {
+      question: "HTML Question G",
+      response: ["Option G1", "Option G2", "Option G3", "Option G4"]
+    },
+    {
+      question: "HTML Question H",
+      response: ["Option H1", "Option H2", "Option H3", "Option H4"]
+    }
+  ];
+  let currentQuestion = 1;
+  let nQuestions = activeQuestions.length;
+
+  // locate the header and store it in a variable
+  let questionHeaderEle = document.querySelector('#currentQuestionHeader');
+  
+  let combinedString = `Question ${currentQuestion} of ${nQuestions}`
+
+  questionHeaderEle.innerHTML = combinedString;
+
+
+//store the data for the current question
+  let currentQuestionData = activeQuestions[currentQuestion - 1];
+  questionTextEle = document.querySelector("#questionText")
+  questionTextEle.innerHTML = currentQuestionData.question;
+
+
+  listItemsEle = document.querySelector("#listItems");
+
+  //loop the response array
+  for(let i = 0; i < currentQuestionData.response.length; i++)
+  {
+    let responseEle = document.createElement("li");
+    let labelEle = document.createElement("label");
+    let inputEle = document.createElement("input");
+
+    //add attributes to input
+    inputEle.setAttribute("type", "radio");
+    inputEle.setAttribute("name", "options");
+
+    //create the text
+    let textEle = document.createTextNode(currentQuestionData.response[i]);
+
+    // append <input> inside of <label>
+    labelEle.appendChild(inputEle);
+
+    //append the text inside of the <label>
+    labelEle.appendChild(textEle);
+
+    // append <label> inside the <li>
+    responseEle.appendChild(labelEle);
+
+    listItemsEle.appendChild(responseEle);
+  }
+
+
+  let progressDotsEle = document.querySelector("#progressDots");
+
+  //loop items
+  for(let i = 0; i < nQuestions; i++)
+  {
+    let progressDotEle = document.createElement("div");    
+    progressDotEle.className = "dots"
+
+    // append empty <div> inside of <div "id=progressDots">
+    progressDotsEle.appendChild(progressDotEle)
+  }  
+</script>
+</html>
