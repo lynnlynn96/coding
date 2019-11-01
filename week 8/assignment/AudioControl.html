@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title></title>
+</head>
+
+<body>
+    <audio id="audioPlayer" controls>      
+      <source id="mp3_src" type="audio/mpeg">
+    Your browser does not support the audio element.
+    </audio>
+    <div>
+        <!-- dropdown will have the filename as values of each option -->
+        <select id="audioSelector">
+          <!-- <option value="audios/Flower.mp4">Flower</option>
+          <option value="audios/Jellyfish.mp4">Jellyfish</option>
+          <option value="audios/MorningMist.mp4">Morning Mist</option>
+          <option value="audios/Under.mp4">Under</option> -->
+        </select>
+      
+        <!-- buttons -->
+        <button id="audioLoad_btn">load</button>
+        <button id="audioPlay_btn">play</button>
+        <button id="audioPause_btn">pause</button>
+        <span id="timestamp"></span>
+        <input type="range" min="0" max="100" value="50" id="volumeRange">
+      </div>
+  <script type="text/javascript">
+    const audioPlayer = document.querySelector("#audioPlayer");
+    const audioLoad_btn = document.querySelector("#audioLoad_btn");
+    const audioPlay_btn = document.querySelector("#audioPlay_btn");
+    const audioPause_btn = document.querySelector("#audioPause_btn");
+    const timestamp = document.querySelector("#timestamp");
+    const audioSelector = document.querySelector("#audioSelector");
+    const volumeAdjuster = document.querySelector('#volumeRange')
+
+    let music = [
+      {
+        title: "acousticbreeze",
+        file: "audios/bensound-acousticbreeze.mp3"
+      },
+      {
+        title: "moose",
+        file: "audios/bensound-moose.mp3"
+      },
+      {
+        title: "retrosoul",
+        file: "audios/bensound-retrosoul.mp3"
+      }
+    ];
+    for(let i = 0; i < music.length; i++){
+      optionEle = document.createElement("option");
+      optionEle.setAttribute("value", music[i].file);
+      optionEle.innerHTML = music[i].title;
+      audioSelector.appendChild(optionEle);
+    }
+
+
+    //load audio that is selected from the drop down
+    let loadaudio = () => {
+      document.querySelector("#mp3_src").src = audioSelector.value;
+      audioPlayer.load();
+    }
+
+    //function to play audio
+    let playaudio = () => {
+      audioPlayer.play();
+    }
+
+    //function to pause audio
+    let pauseaudio = () => {
+      audioPlayer.pause();
+    }
+
+    //function to get time from the audio player
+    //NOTE: 
+    let getTimestamp = (event) => {
+      timestamp.innerHTML = Math.round(event.target.currentTime);
+    }
+
+    //function to set volume of the audio player
+    let updateVolume = (event) => {      
+      audioPlayer.volume = event.target.value / event.target.max
+    }
+
+    //Add Event listeners too all the UI and point callbacks to functions
+    audioLoad_btn.addEventListener("click", loadaudio);
+    audioPlay_btn.addEventListener("click", playaudio);
+    audioPause_btn.addEventListener("click", pauseaudio);
+    audioPlayer.addEventListener("timeupdate", getTimestamp);
+    volumeAdjuster.addEventListener("click", updateVolume);
+  </script>
+</body>
+
+</html>
