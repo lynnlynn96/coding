@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<head>    
+    <title>Weather Forcast</title>
+    <style>
+      .container{
+        display: flex;        
+        align-items: center;
+      }
+      .column{
+        flex-direction: column;
+      }
+      .cityname, .weather_text, .temp{
+        padding: 20px;
+      }
+    </style>
+</head>
+<body>
+  <main>
+    <div class='container column'>
+      <div class='container'>
+          <div class='container column' id='city_1'>
+              <div class='cityName'>New York</div>
+              <div class='temp'>80F~85F</div>
+              <div class='weatherText'>Clouds</div>
+              <div class='weatherIcon'><image src="http://openweathermap.org/img/wn/10d@2x.png"></image></div> 
+          </div>
+          <div class='container column' id='city_2'>
+             <div class='cityname'>New Jersey</div> 
+              <div class='temp'>80F~85F</div>
+              <div class='weather_text'>Clouds</div>
+              <div class='weather_icon'><image src="http://openweathermap.org/img/wn/01d@2x.png"></image></div> 
+          </div>
+          <div class='container column' id='city_3'>
+               <div class='cityname'>Boston</div> 
+            <div class='temp'>80F~85F</div>
+              <div class='weather_text'>Clouds</div>
+              <div class='weather_icon'><image src="http://openweathermap.org/img/wn/10d@2x.png"></image></div> 
+          </div>
+      </div>
+      <div class='container'>
+        <select id='selectTime'>
+          <option>6:00am</option>
+          <option>9:00pm</option> 
+        </select>
+      </div>
+    </div>
+  </main>
+  <script type="text/javascript">
+    const api_key = "9daa7ec8fcc1acde361c3e24822543ad";
+    let cities = [
+      {name: 'New York', 'id': 5128638},
+      {name: 'New Jersey', 'id': 5101760},
+      {name: 'Boston', 'id': 4317656}
+    ];
+    const base_url = 'http:/api.openweathermap.org/data/2.5/forecast?';
+    // Retrieve weather data from public api
+    var citydata = new Object()
+
+    for(let i = 0; i < cities.length; i++){
+      let cityid = cities[i].id;
+      let api_url = `id=${cityid}&APPID=${api_key}&units=imperial`;
+
+      fetch(base_url + api_url)
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+            citydata[cities[i].name] = data;
+        })
+        .then(() => {
+          // Create city weather elements
+          updateCity(i, true, 0);
+          if (i == 0)
+          {
+            const selectTimeEle = document.querySelector('#selectTime');
+            let listData = citydata[cities[i].name].list
+            let N = listData.length
+            for (let j = 0; j < N; j++){
+              timeOption = document.createElement('option');
+              timeOption.innerHTML = listData[j]['dt_txt'];
+              selectTimeEle.appendChild(timeOption);
+            }
+            selectTimeEle.addEventListener('change', updateTime)
+          }
+        })
+    }
+
+    let updateCity = (city_index, isCreate, recordId) =>{
+      
+      let cityEleId = `#city_${city_index + 1}`
+      let cityEle = document.querySelector(cityEleId);
+      let cityName = cities[city_index].name;
+      
+
+      let id = recordId;
+      if(isCreate){
+        var cityNameEle = document.createElement('div');
+        var cityTempEle = document.createElement('div');
+        var cityWeatherTextEle = document.createElement('div');
+        var cityWeatherIconEle = document.createElement('div');
+        var imgEle = document.createElement('img')
+        cityNameEle.className = 'cityName';
+        cityTempEle.className = 'temp';
+        cityWeatherTextEle.className = 'weatherText';
+        cityWeatherIconEle.className = 'weatherIcon';
+        cityWeatherIconEle.appendChild(imgEle)
+      }
+      else{
+        var cityNameEle = document.querySelector(cityEleId + ' .cityName');
+        var cityTempEle = document.querySelector(cityEleId + ' .temp');
+        var cityWeatherTextEle = document.querySelector(cityEleId + ' .weatherText');
+        var cityWeatherIconEle = document.querySelector(cityEleId + ' .weatherIcon')
+        var imgEle = cityWeatherIconEle.firstChild;
+      }
+      let data = citydata[cityName].list[id];
+      
+      cityNameEle.innerHTML = cityName;
+      cityTempEle.innerHTML = `${data.main.temp_min}~${data.main.temp_max} F`;
+      cityWeatherTextEle.innerHTML = data.weather[0].main;
+      let iconId = data.weather[0].icon
+      imgEle.setAttribute('src', `http://openweathermap.org/img/wn/${iconId}@2x.png`)
+      
+      if(isCreate)
+      {
+        // Append city weather elements to city element
+        cityEle.appendChild(cityNameEle);
+        cityEle.appendChild(cityTempEle);
+        cityEle.appendChild(cityWeatherTextEle);
+        cityEle.appendChild(cityWeatherIconEle);
+      }
+      
+    }
+    let updateTime = (event) =>{
+      let recordId = event.target.selectedIndex
+      for(let i = 0; i < cities.length; i++)
+      {
+        updateCity(i, 0, recordId)
+      }
+    }
+    
+  </script>
+</body>
+</html>
