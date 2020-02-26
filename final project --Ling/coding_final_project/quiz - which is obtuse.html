@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>quiz</title>
+	<style type="text/css">
+		body{      
+      	background-image: url("match the name.png");    
+      	background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center;
+		width: 1440px;
+		height: 600px;
+    }
+    /*.question{
+      display: flex;
+      position: fixed;
+      top:500px;
+      left: 500px;
+      font:Times New Roman;
+      font-size: 30px;
+      color:white;
+    }*/
+    main{
+      position: center;
+    }
+
+    /*.title{
+      display: flex;
+      position:fixed;
+      top:10%;
+      left:20%;
+      font:Times New Roman;
+      font-style: italic;
+      font-size: 50px;
+      color: white;
+
+    }*/
+		body/*{
+			background-color: rgb(167, 214, 161);
+		}*/
+		/*#question{
+			text-align: center;
+		}*/
+
+		#options{
+			display: flex;
+			justify-content: space-around;
+			margin-left: 250px;
+			margin-right: 250px;
+			margin-top: 300px;
+		}
+
+		.img {
+			box-shadow: 3px 3px;
+			height: 150px;
+		}
+
+
+		#answerzone{
+			display: flex;
+			flex-direction: column;
+			justify-content: space-around;
+			align-items: center;
+			height: 450px;
+			font-size: 32px;
+			margin: 0px;
+		}
+
+		#AnswerObtuse{
+			
+			width: 400px;
+			height: 80px;
+			margin-bottom: 300px;
+			border-style: solid;
+			border-radius: 10px;
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			background-color: rgb(179, 203, 230);
+			box-shadow: 3px 3px rgb(160, 160, 160);
+		}
+
+		
+		#result{
+			text-align: center;
+			font:Comic Sans MS;
+    		font-size: 50px;
+     		color: white;
+     		position: fixed;
+     		top: 600px;
+     		left: 600px;
+			
+		}
+		#nextpage{
+	      position: fixed;
+	      top: 700px;
+	      left: 1100px;
+	      color: white;
+	      font-size: 48px;
+	    }
+	    #back{
+	      position: fixed;
+	      top: 700px;
+	      left: 200px;
+	      color: white;
+	      font-size: 48px;
+	    }
+	</style>
+</head>
+<body>
+	<!-- <h2 id="question">Choose the acute answer</h2> -->
+	<div id="options">
+		<img src="roof - right.png" id="rightangle" draggable="true" class="img">
+		<img src="sail - acute.png" id="acuteangle" draggable="true" class="img">
+		<img src="clock - obtuse.png" id="obtuseangle" draggable="true" class="img">
+		<!-- <img src="pyramid - acute.png" id="acuteangle" draggable="true" class="img"> -->
+		
+	</div>
+
+
+	
+	<!-- <hr> -->
+	<div id="answerzone">
+		<!-- <div id="AnswerAcute" class="answer">Acute Angle</div>
+		<div id="AnswerRight" class="answer">right Angle</div> -->
+		<div id="AnswerObtuse" class="answer">Obtuse Angle</div>
+		<!-- <div class="break"></div> -->
+		
+	</div>
+
+	<div>
+		<h1 id="result"></h1>
+	</div>
+
+	<a href="final project first page .html" id="nextpage">Next</a>
+   	<a href="quiz - which is right.html" id="back">Back</a>
+
+	<script type="text/javascript">
+		const acuteangle = document.querySelector("#acuteangle");
+		const rightangle = document.querySelector("#rightangle");
+		const obtuseangle = document.querySelector("#obtuseangle");
+		
+		const AnswerObtuse = document.querySelector("#AnswerObtuse");
+		
+
+		const answerzone = document.querySelector("#answerzone")
+
+		const result = document.querySelector("#result");
+
+		let DragStart =(event) =>{
+			event.dataTransfer.setData('text', event.currentTarget.id);
+			console.log(`-----start drag: ${event.currentTarget.id}------`);
+		}
+
+		let DragOver = (event) =>{
+			event.preventDefault();
+			console.log(`-----start drag: ${event.currentTarget.id}------`);
+		}
+
+		let	DragStop =(event) =>{
+			console.log(`-----drop: ${event.currentTarget.id}------`);
+
+			let droppedData = event.dataTransfer.getData('text');
+			
+			if(droppedData == "obtuseangle"){
+				result.innerHTML = "Correct!!!";
+			}else{
+				result.innerHTML = "Try again!!";
+			};
+		}
+
+		acuteangle.addEventListener("dragstart", DragStart);
+		rightangle.addEventListener("dragstart", DragStart);
+		obtuseangle.addEventListener("dragstart", DragStart);
+
+
+		AnswerObtuse.addEventListener("dragover", DragOver);
+
+		AnswerObtuse.addEventListener("drop", DragStop);
+
+	</script>
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
